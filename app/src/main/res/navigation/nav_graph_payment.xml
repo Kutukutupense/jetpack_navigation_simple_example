@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_payment"
+    app:startDestination="@id/paymentFragment3">
+    <fragment
+        android:id="@+id/paymentFragment3"
+        android:name="com.eylem.nav_graph_deneme.PaymentFragment"
+        android:label="fragment_payment"
+        tools:layout="@layout/fragment_payment" >
+        <action
+            android:id="@+id/action_paymentFragment3_to_paymentDonefragment2"
+            app:destination="@id/paymentDonefragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentDonefragment2"
+        android:name="com.eylem.nav_graph_deneme.PaymentDonefragment"
+        android:label="fragment_payment_donefragment"
+        tools:layout="@layout/fragment_payment_donefragment" />
+</navigation>
