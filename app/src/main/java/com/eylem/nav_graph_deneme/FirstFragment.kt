@@ -25,9 +25,12 @@ class FirstFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val name:String = "Eylem"
+        val age:Int = 35
         val btnFirstFragment = view.findViewById<Button>(R.id.btnFirstFragment)
         btnFirstFragment.setOnClickListener {
-            findNavController().navigate(R.id.action_firstFragment_to_secondFragment)
+            val action = FirstFragmentDirections.actionFirstFragmentToSecondFragment(name,age)
+            findNavController().navigate(action)
         }
 
 

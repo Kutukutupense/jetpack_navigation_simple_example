@@ -14,6 +14,13 @@
         android:textSize="25sp"
         android:textAlignment="center"
         android:text="Second Fragment" />
+    <TextView
+        android:id="@+id/twSecondFragment2"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:text="Deneme"
+        android:textSize="25sp"
+        android:gravity="top"/>
 
     <Button
         android:id="@+id/btnSecondFragment"
