@@ -1,0 +1,88 @@
+öncelikle dependencies ekleyelim. build.gradle(module içerisine)
+dependencies {
+  val nav_version = "2.7.7"
+
+  // Jetpack Compose integration
+  implementation("androidx.navigation:navigation-compose:$nav_version")
+
+  // Views/Fragments integration
+  implementation("androidx.navigation:navigation-fragment:$nav_version")
+  implementation("androidx.navigation:navigation-ui:$nav_version")
+
+  // Feature module support for Fragments
+  implementation("androidx.navigation:navigation-dynamic-features-fragment:$nav_version")
+
+  // Testing Navigation
+  androidTestImplementation("androidx.navigation:navigation-testing:$nav_version")
+
+}
+NavHost, NavGraph ve NavController, Jetpack Navigation bileşenlerinin temel parçalarıdır
+ve Android uygulamanızda gezinmeyi yönetmek için birlikte çalışırlar. Her birinin rolünü basitçe açıklayalım:
+
+
+          NavHost: Uygulamanızın gezinme kapsayıcısıdır; ekranların gösterileceği alanı belirler.
+          NavGraph: Ekranlar ve geçişlerin tanımlandığı bir haritadır; uygulamanızdaki tüm gezinme rotalarını içerir.
+          NavController: Kullanıcının gezinme eylemlerini yönetir ve NavHost içindeki ekranlar arasında geçiş yapar;
+          NavGraph'a göre uygun geçişleri gerçekleştirir.
+
+      Bu bileşenler bir araya gelerek, Android uygulamanızda kullanıcıya sezgisel bir gezinme deneyimi sunmanızı sağlar.
+------------------------
+Nested Graph: Nested Graph, Android'de bir gezinme grafiğinin (navigation graph) içinde başka
+bir alt grafik (subgraph) tanımlamaya olanak sağlar. Bu yapı, uygulamanın daha modüler ve yönetilebilir olmasını sağlar.
+navigation klasörü içine açılan ana nav_graphdan farklı yeni graph nav_graph_payment olsun. Bu payment modülü içersinde
+kendi fragment dolaşımını oluşturur.Ama biz bu payment_graph ı ana graphın içine eklememiz gerekir.
+Bunu <include tag i  ile yaparız. bu nested graphın ana graph içinde  MODÜLER! olarak kullanabilmemizi sağlar.
+örnek: aşağıdaki ana graph olsun -->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.HomeFragment"
+        android:label="Home" />
+
+    <!-- Payment graph'ı dahil et -->
+    <include
+    android:id="@+id/nav_graph_payment"
+    app:graph="@navigation/nav_graph_payment" />
+
+</navigation>
+
+Deeplink: Bir ana graph a başka bir child graph include edildiğinde child graph ın yalnızca host
+fragment ına geçiş yapılabilir. Eğer onun başka bir fragment ına geçiş yapılmak isteniyorsa deeplink
+kullanılır.
+Başka bir kullanım örneği: Örneğin bir bankacılık uygulamasında bir dialig çıktı diyelim ya da sms geldi ve iyi bir oranla kredi
+teklifi var biz ona tıkladığımızda bizi direkt kredi ekranına taşıyan şey deeplinkler!
+
+öncelikle hangi fragment a yönlendirme yapacaksak o fragment ın !!nav_graph'ının!!  içinde o
+o <fragment a deeplink uri tanımlaması yapılır. Ben nav_graph_payment içersindeki fragment_payment a yaptım.
+çünkü deeplink ile oraya gitmek istiyorum
+
+<deepLink app:uri="https://www.example.com/profile/{userId}"/>
+
+sonrasında hangi fragmentdan gitmek istiyorsam(ben firstfragment a yaptım) o fragment.xml ine bir button tanımladım ve fragment içine
+
+ val btnDeepLink = view.findViewById<Button>(R.id.btnDeeplink)
+        btnDeepLink.setOnClickListener {
+            val deepLinkUri = Uri.parse("https://www.example.com/profile/{userId}")
+            findNavController().navigate(deepLinkUri)
+        }
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

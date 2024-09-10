@@ -1,5 +1,6 @@
 package com.eylem.nav_graph_deneme
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -28,9 +29,16 @@ class FirstFragment : Fragment() {
         val name:String = "Eylem"
         val age:Int = 35
         val btnFirstFragment = view.findViewById<Button>(R.id.btnFirstFragment)
+
         btnFirstFragment.setOnClickListener {
             val action = FirstFragmentDirections.actionFirstFragmentToSecondFragment(name,age)
             findNavController().navigate(action)
+        }
+
+        val btnDeepLink = view.findViewById<Button>(R.id.btnDeeplink)
+        btnDeepLink.setOnClickListener {
+            val deepLinkUri = Uri.parse("https://www.example.com/profile/{userId}")
+            findNavController().navigate(deepLinkUri)
         }
 
 

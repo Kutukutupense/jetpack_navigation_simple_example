@@ -23,5 +23,12 @@
         android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/btnDeeplink"
+        android:text="Deeplink Button"
+        android:layout_gravity="top"
+        android:textSize="25sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </FrameLayout>

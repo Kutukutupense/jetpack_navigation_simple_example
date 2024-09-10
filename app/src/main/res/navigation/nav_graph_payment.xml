@@ -12,10 +12,13 @@
         <action
             android:id="@+id/action_paymentFragment3_to_paymentDonefragment2"
             app:destination="@id/paymentDonefragment2" />
+        <deepLink
+            app:uri="https://www.example.com/profile/{userId}"/>
     </fragment>
     <fragment
         android:id="@+id/paymentDonefragment2"
         android:name="com.eylem.nav_graph_deneme.PaymentDonefragment"
         android:label="fragment_payment_donefragment"
         tools:layout="@layout/fragment_payment_donefragment" />
+
 </navigation>
