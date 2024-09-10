@@ -70,7 +70,8 @@ sonrasında hangi fragmentdan gitmek istiyorsam(ben firstfragment a yaptım) o f
             val deepLinkUri = Uri.parse("https://www.example.com/profile/{userId}")
             findNavController().navigate(deepLinkUri)
         }
-        
+  ama tabiki bunun çalışması için nested graph ın ana_graph ın içinde <include olarak bulunması gerektiğini unutmayalım
+
 
 
 
